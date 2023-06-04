@@ -20,8 +20,3 @@ function AjaxRequest(url,params,successFunc,errorFunc) {
         error: errorFunc
     });
 }
-
-// click tag start search
-function ClickTagStartSearch(tagName) {
-    location.href = '/?keyword=' + tagName;
-}
