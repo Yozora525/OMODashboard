@@ -25,6 +25,10 @@ def Index():
     return render_template('index.html')
 
 
+# 儀表板
+@app.route("/dashboard")
+def Index():
+    return render_template('dashboard.html')
 ############################## page ##############################
 
 
@@ -41,6 +45,10 @@ def TestAjax():
     print(CurrentData)
     return jsonify(**{'data':CurrentData})
 ############################## ajax ##############################
+
+############################## function ##############################
+
+############################## function ##############################
 
 
 if __name__ == '__main__':
