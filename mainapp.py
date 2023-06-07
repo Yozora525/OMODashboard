@@ -28,6 +28,7 @@ def Index():
 # 儀表板
 @app.route("/dashboard")
 def Index():
+    
     return render_template('dashboard.html')
 ############################## page ##############################
 
@@ -35,6 +36,7 @@ def Index():
 # * ajax return format => oRes = {'res':'success or fail', 'data':[], 'msg':'error only'}
 # * ajax return example => return jsonify(**oRes)
 ############################## ajax ##############################
+# ajax example
 @app.route("/testajax",methods=['GET','POST'])
 def TestAjax():
     if request.method == 'GET':
@@ -44,15 +46,63 @@ def TestAjax():
         CurrentData = request.form.getlist('test')
     print(CurrentData)
     return jsonify(**{'data':CurrentData})
+
+
+# todo 取得按摩椅使用資料 by shiyan
+@app.route("/getmassagechairuserecord",methods=['GET','POST'])
+def GetMassageChairUseRecord():
+    action = GetRequestValue('action') # 1 -> 收入, 2 -> 使用者族群(會員？還是訪客...)
+    lConditions = []
+    lColumns = []
+    print(action)
+
+    if action[0] == '1':
+        lConditions.append("")
+        lColumns.append("")
+
+    elif action[0] == '2':
+        lConditions.append("")
+        lColumns.append("")
+    
+    # todo execute sql 
+    sql = 'SELECT  FROM  WHERE '
+    
+
+    return jsonify(**{})
 ############################## ajax ##############################
 
 ############################## function ##############################
+# todo 取得前端傳回的參數,return data type -> dict, key 'data'->list(尚未測試)
+def GetRequestValue(key):
+    currentData = []
 
+    # judge request method
+    if request.method == 'GET':
+        currentData = request.args.getlist(key)
+
+    elif request.method == 'POST':
+        currentData = request.form.getlist(key)
+
+    if len(currentData):
+
+        for i in range(len(currentData)):
+
+            if not currentData[i]:
+                currentData.pop(i)
+                continue
+
+            if currentData[i] == 'undefined':
+                currentData[i] = None
+
+    else:
+        currentData = []
+
+    return {'res':'success','data':currentData}
 ############################## function ##############################
 
 
 if __name__ == '__main__':
-    app.run('0.0.0.0',port=8080,debug=True)
+    app.run('0.0.0.0',port=8083,debug=True)
 
 
 # 程式結束時釋放資料庫資源
