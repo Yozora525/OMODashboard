@@ -16,12 +16,10 @@ def Mysql():
     # 連接資料庫
     #db = pymysql.connect(host="localhost", port=3306, user="root", passwd="root", db="Geek_Web", charset="utf8mb4")
     db = pymysql.connect(**config)
-    #cursor()方法獲取操作游標 
-    cursor = db.cursor()
- 
+    
     try:
         print('success')
-        return (db, cursor)
+        return db
  
     except:
         print("fail") 
