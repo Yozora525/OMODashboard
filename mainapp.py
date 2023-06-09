@@ -2,6 +2,7 @@ from flask import Flask, app, redirect, session, request, jsonify, Response, url
 from flask_sqlalchemy import SQLAlchemy
 import os,sys
 import requests
+from datetime import datetime
 
 from model import Mysql
 import src,model
@@ -15,7 +16,7 @@ db = Mysql()
 cursor = db.cursor()
 
 #初始化功能模組
-tools_CommonTools = src.CommonTools.CommonTools()
+tools_CommonTools = src.CommonTools.CommonTools(request)
 
 
 ############################## page ##############################
@@ -27,7 +28,7 @@ def Index():
 
 # 儀表板
 @app.route("/dashboard")
-def Index():
+def Dashboard():
     
     return render_template('dashboard.html')
 ############################## page ##############################
@@ -51,54 +52,22 @@ def TestAjax():
 # todo 取得按摩椅使用資料 by shiyan
 @app.route("/getmassagechairuserecord",methods=['GET','POST'])
 def GetMassageChairUseRecord():
-    action = GetRequestValue('action') # 1 -> 收入, 2 -> 使用者族群(會員？還是訪客...)
-    lConditions = []
-    lColumns = []
-    print(action)
+    # place = tools_CommonTools.GetRequestValue('place') or None # 地點Id
+    # month = datetime.now().month
 
-    if action[0] == '1':
-        lConditions.append("")
-        lColumns.append("")
-
-    elif action[0] == '2':
-        lConditions.append("")
-        lColumns.append("")
     
-    # todo execute sql 
-    sql = 'SELECT  FROM  WHERE '
+    # if place['data'][0]:
+    #     strGetChairUseRecord = f'SELECT public_chair.ChairId,PayMethod,Minute,Sum FROM public_chair_use_record LEFT JOIN public_chair ON public_chair.ChairId=public_chair_use_record.Chair WHERE public_chair.PlaceId=\'{place}\';'
+    
+    # else:
+    #     strGetChairUseRecord = f'SELECT public_chair.ChairId,PayMethod,Minute,Sum FROM public_chair_use_record LEFT JOIN public_chair ON public_chair.ChairId=public_chair_use_record.Chair;'
+    
+    # execute sql
+    
     
 
-    return jsonify(**{})
+    return jsonify(**{'res':'success'})
 ############################## ajax ##############################
-
-############################## function ##############################
-# todo 取得前端傳回的參數,return data type -> dict, key 'data'->list(尚未測試)
-def GetRequestValue(key):
-    currentData = []
-
-    # judge request method
-    if request.method == 'GET':
-        currentData = request.args.getlist(key)
-
-    elif request.method == 'POST':
-        currentData = request.form.getlist(key)
-
-    if len(currentData):
-
-        for i in range(len(currentData)):
-
-            if not currentData[i]:
-                currentData.pop(i)
-                continue
-
-            if currentData[i] == 'undefined':
-                currentData[i] = None
-
-    else:
-        currentData = []
-
-    return {'res':'success','data':currentData}
-############################## function ##############################
 
 
 if __name__ == '__main__':

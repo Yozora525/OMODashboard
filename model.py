@@ -1,11 +1,12 @@
 import pymysql
 
+# ! passwd 需自行更改
 config = {
     'host':'localhost',
     'port':3306,
     'user':'root',
-    'passwd':'',
-    'db':'',
+    'passwd':'zcad13qe',
+    'db':'omo',
     'charset':'utf8mb4',
     # 資料庫內容以字典格式輸出
     #'cursorclass':pymysql.cursors.DictCursor,
