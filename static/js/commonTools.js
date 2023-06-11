@@ -20,3 +20,17 @@ function AjaxRequest(url,params,successFunc,errorFunc) {
         error: errorFunc
     });
 }
+
+// draw chart
+function DrawChart(chartType,xValue,yValue){
+    // check xValue length and yValue length
+    if(xValue.length != yValue.length){ 
+        alert('x軸與y軸長度不一致！');
+        return;
+    }
+
+    // create chart container
+    var canvas = document.createElement('canvas');
+
+    
+}
