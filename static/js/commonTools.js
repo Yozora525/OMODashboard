@@ -22,15 +22,24 @@ function AjaxRequest(url,params,successFunc,errorFunc) {
 }
 
 // draw chart
-function DrawChart(chartType,xValue,yValue){
+function DrawChart(chartType,canvasElement,xValue,yValue,datasets){
     // check xValue length and yValue length
     if(xValue.length != yValue.length){ 
         alert('x軸與y軸長度不一致！');
         return;
     }
 
-    // create chart container
-    var canvas = document.createElement('canvas');
+    let ChartsConfigData = {
+        type: chartType,
+        data: {
+            labels: xValue,
+            datasets: datasets
+        }
+    }
 
-    
+
+
+    new Chart($(canvasElement), ChartsConfigData);
+
+    return $(canvasElement);
 }
