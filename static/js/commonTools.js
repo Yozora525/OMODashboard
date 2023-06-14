@@ -1,10 +1,10 @@
 // * 常用的function
-// location to index
+// location to index by shiyan
 function ReturnToIndex(){
     location.href = "/";
 }
 
-// call ajax
+// call ajax by shiyan
 function AjaxRequest(url,params,successFunc,errorFunc) {
     url = url || '';
     params = params || {};
@@ -21,8 +21,8 @@ function AjaxRequest(url,params,successFunc,errorFunc) {
     });
 }
 
-// draw chart
-function SetMultipleChart(CanvasElement,xValues,Datasets, yMaxValue, ChartType,ChartOptionsKey,ChartOptionsValue,onClickFunc,onHoverFunc, yShowPercentage, yBeginAtZero,yScaleColors,yScaleDrawBorder=false) {
+// draw chart by shiyan
+function SetMultipleChart(CanvasElement,xValues,Datasets, yMaxValue, ChartType,ChartOptionsKey=[],ChartOptionsValue=[],dictChartOptions,onClickFunc,onHoverFunc, yShowPercentage, yBeginAtZero,yScaleColors,yScaleDrawBorder=false) {
     isNaN(parseInt(yMaxValue)) ? yMaxValue = 10 : false;
     isNaN(parseInt(yShowPercentage)) ? yShowPercentage = 0 : yShowPercentage = 1;
     isNaN(parseInt(yBeginAtZero)) ? yBeginAtZero = 1 : yBeginAtZero = 0;
@@ -99,13 +99,34 @@ function SetMultipleChart(CanvasElement,xValues,Datasets, yMaxValue, ChartType,C
             }
     }
 
+    if (dictChartOptions != undefined) {
+        ChartsConfigData['options'] = dictChartOptions
+    }
+
     if (ChartOptionsKey.length != ChartOptionsValue.length) {
+
         console.log('ChartOptionsKey與ChartOptionsValue長度不一致！');
         return;
+
     } else {
+        
         for (let i = 0; i < ChartOptionsKey.length; i++) {
-            ChartsConfigData['option'][ChartOptionsKey[i]] = ChartOptionsValue[i];
+            
+            var currentObject = ChartsConfigData['options'];
+
+            for (let j = 0; j < ChartOptionsKey[i].length; j++) {
+
+                if (currentObject[ChartOptionsKey[i][j]] == undefined) {
+                    currentObject[ChartOptionsKey[i][j]] = undefined;
+                } else {
+                    currentObject = currentObject[ChartOptionsKey[i][j]];
+                }
+
+            }
+
+            currentObject[ChartOptionsKey[i][ChartOptionsKey[i].length-1]] = ChartOptionsValue[i];
         }
+
     }
 
     onClickFunc ? ChartsConfigData['options']['onClick'] = onClickFunc : onClickFunc;

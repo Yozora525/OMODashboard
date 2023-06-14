@@ -20,13 +20,13 @@ tools_CommonTools = src.CommonTools.CommonTools(request)
 
 
 ############################## page ##############################
-# 首頁
+# index by shiyan
 @app.route("/")
 def Index():
     return render_template('index.html')
 
 
-# 儀表板
+# dashboard by shiyan
 @app.route("/dashboard")
 def Dashboard():
     
@@ -37,7 +37,7 @@ def Dashboard():
 # * ajax return format => oRes = {'res':'success or fail', 'data':[], 'msg':'error only'}
 # * ajax return example => return jsonify(**oRes)
 ############################## ajax ##############################
-# ajax example
+# ajax example by shiyan
 @app.route("/testajax",methods=['GET','POST'])
 def TestAjax():
     if request.method == 'GET':
@@ -47,26 +47,6 @@ def TestAjax():
         CurrentData = request.form.getlist('test')
     print(CurrentData)
     return jsonify(**{'data':CurrentData})
-
-
-# todo 取得按摩椅使用資料 by shiyan
-@app.route("/getmassagechairuserecord",methods=['GET','POST'])
-def GetMassageChairUseRecord():
-    # place = tools_CommonTools.GetRequestValue('place') or None # 地點Id
-    # month = datetime.now().month
-
-    
-    # if place['data'][0]:
-    #     strGetChairUseRecord = f'SELECT public_chair.ChairId,PayMethod,Minute,Sum FROM public_chair_use_record LEFT JOIN public_chair ON public_chair.ChairId=public_chair_use_record.Chair WHERE public_chair.PlaceId=\'{place}\';'
-    
-    # else:
-    #     strGetChairUseRecord = f'SELECT public_chair.ChairId,PayMethod,Minute,Sum FROM public_chair_use_record LEFT JOIN public_chair ON public_chair.ChairId=public_chair_use_record.Chair;'
-    
-    # execute sql
-    
-    
-
-    return jsonify(**{'res':'success'})
 ############################## ajax ##############################
 
 
