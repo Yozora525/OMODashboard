@@ -1,4 +1,11 @@
 $(function(){
+    // click massage chair chart.
+    $("[data-container='massageChairChart']").on("click", function(){
+        // open massage chair page in new tab
+        window.open('/massagechair');
+    });
+
+    // ################################### chart ###################################
     // 按摩椅日常營運-全地區 by shiyan
     SetMultipleChart("[data-chart='massageChairAll']",['大潤發劉老店','家樂福劉老店','7-11劉老店','劉老辦公室'],[{
         type: 'bar',
@@ -8,6 +15,6 @@ $(function(){
         borderWidth: 2,
         borderColor: '#124429',
     }],false,'bar',[['scales','y','grid','color']],['blue']);
-
+    // ################################### chart ###################################
 
 });
