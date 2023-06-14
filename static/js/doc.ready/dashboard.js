@@ -15,6 +15,12 @@ $(function(){
         borderWidth: 2,
         borderColor: '#124429',
     }],false,'bar',[['scales','y','grid','color']],['blue']);
+
+    // todo 業務員業績及目標 by shiyan
+
+
+    // todo 接觸點 by shiyan
+
     // ################################### chart ###################################
 
 });
