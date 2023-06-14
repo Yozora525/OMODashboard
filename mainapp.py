@@ -31,6 +31,13 @@ def Index():
 def Dashboard():
     
     return render_template('dashboard.html')
+
+
+# massage chair analyze
+@app.route("/massagechair")
+def MassageChair():
+    
+    return render_template('massageChair.html')
 ############################## page ##############################
 
 

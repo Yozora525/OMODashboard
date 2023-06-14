@@ -1,22 +1,13 @@
 $(function(){
-    // draw chart example
-    SetMultipleChart("[data-chart='massageChair']",['按摩椅1號','按摩椅2號','按摩椅3號','按摩椅4號','按摩椅4號'],[{
-        type: 'line',
-        label: '電子支付金額',
-        data: [3000,1600,1300,3100,3800],
-        backgroundColor: "orange",
+    // 按摩椅日常營運-全地區 by shiyan
+    SetMultipleChart("[data-chart='massageChairAll']",['大潤發劉老店','家樂福劉老店','7-11劉老店','劉老辦公室'],[{
+        type: 'bar',
+        label: '地區總收入',
+        data: [28200,30000,15000,12000],
+        backgroundColor: "blue",
         borderWidth: 2,
         borderColor: '#124429',
-    },
-    {
-        type: 'bar',
-        label: '總金額',
-        data: [4000,2200,1700,3500,4000],
-        backgroundColor: "orange",
-        borderWidth: 0,
-        borderColor: '#9B1B30',
     }],false,'bar',[['scales','y','grid','color']],['blue']);
-
 
 
 });
