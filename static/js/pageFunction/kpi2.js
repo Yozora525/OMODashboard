@@ -1,4 +1,4 @@
-<script>
+
 var ageData = [20, 25, 30, 35, 40, 45, 50];
 var maleSatisfactionData = [];
 var femaleSatisfactionData = [];
@@ -31,8 +31,8 @@ function generateData(gender) {
 }
 
 function createBarChart() {
-  var ctx = document.getElementById('barChart').getContext('2d');
-  barChart = new Chart(ctx, {
+  var ctx2 = document.getElementById('barChart').getContext('2d');
+  barChart = new Chart(ctx2, {
     type: 'bar',
     data: {
       labels: labels,
@@ -84,4 +84,3 @@ function updateBarChart() {
 
 generateData('male');
 createBarChart();
-</script>

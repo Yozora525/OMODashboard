@@ -4,88 +4,11 @@
 {% include '/frame/head.html' %}
 <script type="text/javascript" src="../static/js/pageFunction/dashboard.js"></script>
 <script type="text/javascript" src="../static/js/doc.ready/dashboard.js"></script>
+<script type="text/javascript" src="../static/js/pageFunction/kpi1.js"></script>
+<script type="text/javascript" src="../static/js/pageFunction/kpi2.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" />
 <style>
-    * {
-        box-sizing: border-box;
-    }
 
-    body {
-        margin: 0;
-        padding: 0;
-    }
-
-    .dashboard {
-        display: grid;
-        grid-template-columns: 200px 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr;
-        gap: 20px;
-        height: 100vh;
-        max-width: 100%;
-        overflow: hidden;
-    }
-
-    .sidebar {
-        grid-column: 1 / span 1;
-        grid-row: 1 / span 2;
-        background-color: #f2f2f2;
-        padding: 20px;
-    }
-
-    .sidebar-title {
-        text-align:center;
-        font-size: 24px;
-        font-weight: bold;
-        margin-bottom: 20px;
-    }
-
-    .section {
-        border: 1px solid #ccc;
-        padding: 10px;
-        transition: background-color 0.3s ease;
-        cursor: pointer;
-    }
-
-    .section:hover {
-        background-color: #e6e6e6;
-    }
-
-    .section-title {
-        font-size: 18px;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
-
-    .subsection {
-        display: flex;
-        margin-bottom: 10px;
-    }
-
-    .chart {
-        flex: 1;
-        height: 200px;
-        background-color: #f2f2f2;
-        margin-right: 10px;
-    }
-
-    .section-a {
-        grid-column: 2 / span 1;
-        grid-row: 1 / span 1;
-    }
-
-    .section-b {
-        grid-column: 2 / span 1;
-        grid-row: 2 / span 1;
-    }
-
-    .section-c {
-        grid-column: 3 / span 1;
-        grid-row: 1 / span 2;
-    }
-
-    .section-d {
-        grid-column: 4 / span 1;
-        grid-row: 1 / span 2;
-    }
 </style>
 
 <body>
@@ -125,32 +48,52 @@
         <div class="section section-c" id="section-c">
             <div class="section-title">C. KPI分析</div>
             <div class="subsection">
-            <div class="chart"></div>
-            </div>
-            <div class="subsection">
-            <div class="chart"></div>
-            </div>
-            <div class="subsection">
-            <div class="chart"></div>
-            </div>
-        </div>
-        <div class="section section-d" id="section-d">
-            <div class="section-title">D. 日常營運項目</div>
-            <div class="subsection">
-                <div class="chart"  data-container="massageChairChart">
-                    <label>2023年6月份按摩椅營運狀況-全地區</label>
-                    <canvas data-chart-type="bar" data-chart="massageChairAll"></canvas>
+                <!-- 折線圖 -->
+                <div class="chart">
+                    <h5 class="panel-header">行銷廣告觸及數折線圖</h5>
+                    <canvas id="kpiChart"></canvas>
+                    <div class="buttons btn-group" role="group">
+                        <button class="btn btn-secondary" onclick="updateChart('week')">週</button>
+                        <button class="btn btn-secondary" onclick="updateChart('month')">月</button>
+                        <button class="btn btn-secondary" onclick="updateChart('year')">年</button>
+                    </div>
                 </div>
             </div>
-            <div class="subsection">
-                <div class="chart"  data-container="aimChart">
-                    <label>2023年6月份業務員目標</label>
-                    <canvas data-chart-type="bar" data-chart="aim"></canvas>
+                <div class="subsection">
+                    <div class="chart">
+                        <h5 class="panel-header">各年齡顧客滿意度長條圖</h5>
+                        <div class="fixW">
+                            <canvas id="barChart"></canvas>
+                            <div class="buttons btn-group button-group" role="group">
+                                <button class="btn btn-secondary" id="maleBtn" onclick="changeData('male')">男</button>
+                                <button class="btn btn-secondary" id="femaleBtn"
+                                    onclick="changeData('female')">女</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="chart"></div>
                 </div>
             </div>
-            <div class="subsection">
-                <div class="chart" data-container="touchTable">
-                    <label>潛在顧客接觸點</label>
+
+            <div class="section section-d" id="section-d">
+                <div class="section-title">D. 日常營運項目</div>
+                <div class="subsection">
+                    <div class="chart" data-container="massageChairChart">
+                        <label>2023年6月份按摩椅營運狀況-全地區</label>
+                        <canvas data-chart-type="bar" data-chart="massageChairAll"></canvas>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="chart" data-container="aimChart">
+                        <label>2023年6月份業務員目標</label>
+                        <canvas data-chart-type="bar" data-chart="aim"></canvas>
+                    </div>
+                </div>
+                <div class="subsection">
+                    <div class="chart" data-container="touchTable">
+                        <label>潛在顧客接觸點</label>
                         <table border="1px">
                             <thead>
                                 <tr>
@@ -185,9 +128,10 @@
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 </body>
+
 </html>

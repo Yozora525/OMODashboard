@@ -5,7 +5,7 @@ config = {
     'host':'localhost',
     'port':3306,
     'user':'root',
-    'passwd':'zcad13qe',
+    'passwd':'1234',
     'db':'omo',
     'charset':'utf8mb4',
     # 資料庫內容以字典格式輸出
