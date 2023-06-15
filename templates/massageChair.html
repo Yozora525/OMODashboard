@@ -6,13 +6,13 @@
 <body>
     {% include '/frame/header.html' %}
     <main>
-        <select data-filter="area">
+        <select data-filter="area" style="font-size: 24px;">
             <option value="大潤發劉老店">大潤發劉老店</option>
             <option value="家樂福劉老店">家樂福劉老店</option>
             <option value="7-11劉老店">7-11劉老店</option>
             <option value="劉老辦公室">劉老辦公室</option>
         </select>
-        <div style="height:300px;width: 500px;text-align: center;" data-container="chart">
+        <div style="width: 80%;text-align: center;margin-left: 10%;margin-right: 10%;" data-container="chart">
             <label data-chart-title>2023年6月份按摩椅營運狀況-大潤發劉老店</label>
             <canvas data-chart-type="bar" data-chart="massageChair"></canvas>
         </div>
