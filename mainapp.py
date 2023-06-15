@@ -12,8 +12,8 @@ import src,model
 app = Flask(__name__,static_url_path ='/static/')
 
 # 呼叫 Mysql() 函式以獲取 db 變數
-db = Mysql()
-cursor = db.cursor()
+# db = Mysql()
+# cursor = db.cursor()
 
 #初始化功能模組
 tools_CommonTools = src.CommonTools.CommonTools(request)
