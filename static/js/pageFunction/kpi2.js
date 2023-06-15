@@ -1,7 +1,5 @@
-
 var ageData = [20, 25, 30, 35, 40, 45, 50];
-var maleSatisfactionData = [];
-var femaleSatisfactionData = [];
+var satisfactionData = [];
 var labels = [];
 var barChart;
 
@@ -9,22 +7,20 @@ function getRandomSatisfaction() {
   return Math.floor(Math.random() * 10) + 1;
 }
 
-function generateData(gender) {
-  maleSatisfactionData = [];
-  femaleSatisfactionData = [];
+function generateData() {
+  satisfactionData = [];
   labels = [];
 
   for (var i = 0; i < ageData.length; i++) {
     var age = ageData[i];
-    var satisfaction = getRandomSatisfaction();
+    var maleSatisfaction = getRandomSatisfaction();
+    var femaleSatisfaction = getRandomSatisfaction();
 
-    if (gender === 'male') {
-      maleSatisfactionData.push(satisfaction);
-      femaleSatisfactionData.push(null);
-    } else if (gender === 'female') {
-      maleSatisfactionData.push(null);
-      femaleSatisfactionData.push(satisfaction);
-    }
+    satisfactionData.push({
+      age: age,
+      maleSatisfaction: maleSatisfaction,
+      femaleSatisfaction: femaleSatisfaction
+    });
 
     labels.push('年龄' + age);
   }
@@ -36,15 +32,18 @@ function createBarChart() {
     type: 'bar',
     data: {
       labels: labels,
-      datasets: [{
-        label: '男性',
-        data: maleSatisfactionData,
-        backgroundColor: 'rgba(54, 162, 235, 0.8)'
-      }, {
-        label: '女性',
-        data: femaleSatisfactionData,
-        backgroundColor: 'rgba(255, 99, 132, 0.8)'
-      }]
+      datasets: [
+        {
+          label: '男性',
+          data: satisfactionData.map(item => item.maleSatisfaction),
+          backgroundColor: 'rgba(54, 162, 235, 0.8)'
+        },
+        {
+          label: '女性',
+          data: satisfactionData.map(item => item.femaleSatisfaction),
+          backgroundColor: 'rgba(255, 99, 132, 0.8)'
+        }
+      ]
     },
     options: {
       responsive: true,
@@ -71,16 +70,5 @@ function createBarChart() {
   });
 }
 
-function changeData(gender) {
-  generateData(gender);
-  updateBarChart();
-}
-
-function updateBarChart() {
-  barChart.data.datasets[0].data = maleSatisfactionData;
-  barChart.data.datasets[1].data = femaleSatisfactionData;
-  barChart.update();
-}
-
-generateData('male');
+generateData();
 createBarChart();
