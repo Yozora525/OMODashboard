@@ -39,6 +39,11 @@ def MassageChair():
     
     return render_template('massageChair.html')
 
+@app.route("/customer")
+def customer():
+    
+    return render_template('customer.html')
+
 
 # 接觸點
 @app.route("/touch",methods=['GET'])
