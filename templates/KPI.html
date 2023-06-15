@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>儀表板</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="../static/js/pageFunction/kpi1.js"></script> -->
+  <!-- <script src="../static/js/pageFunction/kpi2.js"></script> -->
+  <style>
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      padding: 20px;
+    }
+
+    .panel {
+      background-color: #f8f9fa;
+      padding: 20px;
+      border-radius: 5px;
+    }
+
+    .panel-header {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .chart-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .buttons {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .button-group {
+      margin-bottom: 20px;
+    }
+    .button-group button {
+      background-color: #e0e0e0;
+      border: none;
+      color: #000;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+    .fixW {
+      max-width: 500px;
+      margin-top: 20px;
+      max-height: 300px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dashboard">
+    <div class="panel">
+      <h2 class="panel-header">板塊1</h2>
+      <div class="chart-container">
+        <!-- 放置分析圖表1 -->
+      </div>
+      <div class="chart-container">
+        <!-- 放置分析圖表2 -->
+      </div>
+    </div>
+    <div class="panel">
+      <h2 class="panel-header">板塊2</h2>
+      <div class="chart-container">
+        <!-- 放置分析圖表3 -->
+      </div>
+      <div class="chart-container">
+        <!-- 放置分析圖表4 -->
+      </div>
+    </div>
+    <div class="panel">
+      <h2 class="panel-header">KPI</h2>
+      <div class="chart-container">
+        <h5 class="panel-header">行銷廣告觸及數折線圖</h5>
+        <div>
+          <canvas id="kpiChart"></canvas>
+        </div>
+        <div class="buttons btn-group" role="group">
+          <button class="btn btn-secondary" onclick="updateChart('week')">週</button>
+          <button class="btn btn-secondary" onclick="updateChart('month')">月</button>
+          <button class="btn btn-secondary" onclick="updateChart('year')">年</button>
+        </div>
+      </div>
+      <div class="chart-container">
+        <!-- 放置分析圖表5 -->
+        <h5 class="panel-header">各年齡顧客滿意度長條圖</h5>
+        <div class="fixW">
+          <canvas id="barChart"></canvas>
+          <div class="buttons btn-group button-group" role="group">
+            <button class="btn btn-secondary" id="maleBtn" onclick="changeData('male')">男</button>
+            <button class="btn btn-secondary" id="femaleBtn" onclick="changeData('female')">女</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="panel">
+      <h2 class="panel-header">板塊4</h2>
+      <div class="chart-container">
+        <!-- 放置分析圖表6 -->
+      </div>
+      <div class="chart-container">
+        <!-- 放置分析圖表7 -->
+      </div>
+    </div>
+  </div>
+
+
+  <script>
+    // 行銷 KPI1 折線圖資料
+
+
+
+    // 假設的數據
+    const websiteData = [100, 150, 120, 180, 200, 160, 220];
+    const fbData = [80, 100, 90, 120, 110, 130, 150];
+    const igData = [50, 60, 70, 80, 90, 100, 110];
+    const dates = ['2023/06/11', '2023/06/12', '2023/06/13', '2023/06/14', '2023/06/15', '2023/06/16', '2023/06/17'];
+
+    // 初始化折線圖
+    const ctx = document.getElementById('kpiChart').getContext('2d');
+    let kpiChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: dates,
+        datasets: [{
+            label: '網站',
+            data: websiteData,
+            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'FB',
+            data: fbData,
+            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1,
+            fill: false
+          },
+          {
+            label: 'IG',
+            data: igData,
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            fill: false
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false
+      }
+    });
+
+    // 更新圖表
+    function updateChart(type) {
+      let newData = [];
+      let newLabels = [];
+
+      switch (type) {
+        case 'week':
+          newData = websiteData.slice(0, 7);
+          newLabels = dates.slice(0, 7);
+          break;
+        case 'month':
+          newData = websiteData.slice(0, 4);
+          newLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+          break;
+        case 'year':
+          newData = websiteData.slice(0, 12);
+          newLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+          break;
+        default:
+          newData = websiteData;
+          newLabels = dates;
+      }
+
+      kpiChart.data.labels = newLabels;
+      kpiChart.data.datasets[0].data = newData;
+      kpiChart.update();
+    }
+
+     // 行銷 KPI2 長條圖資料
+
+    var ageData = [20, 25, 30, 35, 40, 45, 50];
+    var maleSatisfactionData = [];
+    var femaleSatisfactionData = [];
+    var labels = [];
+    var barChart;
+
+    function getRandomSatisfaction() {
+      return Math.floor(Math.random() * 10) + 1;
+    }
+
+    function generateData(gender) {
+      maleSatisfactionData = [];
+      femaleSatisfactionData = [];
+      labels = [];
+
+      for (var i = 0; i < ageData.length; i++) {
+        var age = ageData[i];
+        var satisfaction = getRandomSatisfaction();
+
+        if (gender === 'male') {
+          maleSatisfactionData.push(satisfaction);
+          femaleSatisfactionData.push(null);
+        } else if (gender === 'female') {
+          maleSatisfactionData.push(null);
+          femaleSatisfactionData.push(satisfaction);
+        }
+
+        labels.push('年龄' + age);
+      }
+    }
+
+    function createBarChart() {
+      var ctx = document.getElementById('barChart').getContext('2d');
+      barChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '男性',
+            data: maleSatisfactionData,
+            backgroundColor: 'rgba(54, 162, 235, 0.8)'
+          }, {
+            label: '女性',
+            data: femaleSatisfactionData,
+            backgroundColor: 'rgba(255, 99, 132, 0.8)'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            x: {
+              display: true,
+              title: {
+                display: true,
+                text: '年龄'
+              }
+            },
+            y: {
+              display: true,
+              title: {
+                display: true,
+                text: '顾客服务满意度'
+              },
+              suggestedMin: 1,
+              suggestedMax: 10
+            }
+          }
+        }
+      });
+    }
+
+    function changeData(gender) {
+      generateData(gender);
+      updateBarChart();
+    }
+
+    function updateBarChart() {
+      barChart.data.datasets[0].data = maleSatisfactionData;
+      barChart.data.datasets[1].data = femaleSatisfactionData;
+      barChart.update();
+    }
+
+    generateData('male');
+    createBarChart();
+  </script>
+</body>
+
+</html>
