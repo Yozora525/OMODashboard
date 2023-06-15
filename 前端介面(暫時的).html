@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>儀表板</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: 200px 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+            height: 100vh;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            grid-column: 1 / span 1;
+            grid-row: 1 / span 2;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        .sidebar-title {
+            text-align:center;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            border: 1px solid #ccc;
+            padding: 10px;
+            transition: background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .section:hover {
+            background-color: #e6e6e6;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .subsection {
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .chart {
+            flex: 1;
+            height: 200px;
+            background-color: #f2f2f2;
+            margin-right: 10px;
+        }
+
+        .section-a {
+            grid-column: 2 / span 1;
+            grid-row: 1 / span 1;
+        }
+
+        .section-b {
+            grid-column: 2 / span 1;
+            grid-row: 2 / span 1;
+        }
+
+        .section-c {
+            grid-column: 3 / span 1;
+            grid-row: 1 / span 2;
+        }
+
+        .section-d {
+            grid-column: 4 / span 1;
+            grid-row: 1 / span 2;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <div class="sidebar-title">OMO</div>
+            <div class="section section-a" onclick="">
+                <div class="section-title">...</div>
+            </div>
+            <div class="section section-b" onclick="">
+                <div class="section-title">....</div>
+            </div>
+            <div class="section section-c" onclick="">
+                <div class="section-title">.....</div>
+            </div>
+            <div class="section section-d" onclick="">
+                <div class="section-title">......</div>
+            </div>
+        </div>
+    
+
+
+        <div class="section section-a" id="section-a">
+            <div class="section-title">A. 客戶分析</div>
+            <div class="subsection">
+                <div class="chart"></div>
+                <div class="chart"></div>
+            </div>
+        </div>
+
+        <div class="section section-b" id="section-b">
+            <div class="section-title">B. 個別銷售狀況</div>
+            <div class="subsection">
+                <div class="chart"></div>
+                <div class="chart"></div>
+            </div>
+        </div>
+
+        <div class="section section-c" id="section-c">
+            <div class="section-title">C. KPI分析</div>
+            <div class="subsection">
+            <div class="chart"></div>
+            </div>
+            <div class="subsection">
+            <div class="chart"></div>
+            </div>
+            <div class="subsection">
+            <div class="chart"></div>
+            </div>
+            </div>
+            <div class="section section-d" id="section-d">
+                <div class="section-title">D. 日常營運項目</div>
+                <div class="subsection">
+                    <div class="chart"></div>
+                </div>
+                <div class="subsection">
+                    <div class="chart"></div>
+                </div>
+                <div class="subsection">
+                    <div class="chart"></div>
+                </div>
+            </div>
+        </div>
+        </body>
+</html>
