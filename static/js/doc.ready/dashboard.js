@@ -1,8 +1,13 @@
 $(function(){
-    // click massage chair chart.
+    // click massage chair chart. by shiyan
     $("[data-container='massageChairChart']").on("click", function(){
         // open massage chair page in new tab
         window.open('/massagechair');
+    });
+
+    // click table's project id . by shiyan
+    $("[data-project-id]").on("click", function(){
+        location.href = '/touch?touch=' + this.textContent;
     });
 
     // ################################### chart ###################################
@@ -32,9 +37,6 @@ $(function(){
         borderWidth: 2,
         borderColor: '#124429',
     }],false,'bar',[['scales','y','grid','color']],['blue']);
-
-    // todo 接觸點 by shiyan
-
     // ################################### chart ###################################
 
 });

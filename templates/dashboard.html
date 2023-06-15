@@ -10,9 +10,46 @@
             <label>2023年6月份按摩椅營運狀況-全地區</label>
             <canvas data-chart-type="bar" data-chart="massageChairAll"></canvas>
         </div>
-        <div style="height:300px;width: 500px;text-align: center;" data-container="massageChairChart">
+        <div style="height:300px;width: 500px;text-align: center;" data-container="aimChart">
             <label>2023年6月份業務員目標</label>
             <canvas data-chart-type="bar" data-chart="aim"></canvas>
+        </div>
+        <div style="height:300px;width: 500px;text-align: center;" data-container="touchTable">
+            <label>潛在顧客接觸點</label>
+            <table border="1px">
+                <thead>
+                    <tr>
+                        <td>專案編號</td>
+                        <td>會員姓名</td>
+                        <td>專案起始日</td>
+                        <td>專案結束日</td>
+                        <td>接觸次數</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span data-project-id>P176593758139</span></td>
+                        <td>習大大</td>
+                        <td>2023-06-04</td>
+                        <td>-</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td><span data-project-id>P176593776044</span></td>
+                        <td>李大大</td>
+                        <td>2023-06-07</td>
+                        <td>-</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td><span data-project-id>P176593738561</span></td>
+                        <td>劉大大</td>
+                        <td>2023-06-11</td>
+                        <td>-</td>
+                        <td>3</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
     {% include '/frame/footer.html' %}
