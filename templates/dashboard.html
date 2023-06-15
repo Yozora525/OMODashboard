@@ -4,7 +4,6 @@
 {% include '/frame/head.html' %}
 <script type="text/javascript" src="../static/js/pageFunction/dashboard.js"></script>
 <script type="text/javascript" src="../static/js/doc.ready/dashboard.js"></script>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" />
 <style>
 
@@ -49,244 +48,308 @@
             <div class="subsection">
                 <!-- 折線圖 -->
                 <div class="chart">
-                    <div>
-                        <span>行銷廣告觸及數折線圖</span>
-                        <span class="buttons btn-group" role="group">
-                            <button class="btn btn-secondary" onclick="updateChart('week')">週</button>
-                            <button class="btn btn-secondary" onclick="updateChart('month')">月</button>
-                            <button class="btn btn-secondary" onclick="updateChart('year')">年</button>
-                        </span>
+                    <label>財務健康折線圖</label>
+                    <div class="fixW">
+                        <canvas id="financialChart"></canvas>
                     </div>
-
-                    <canvas id="kpiChart"></canvas>
-
                 </div>
             </div>
-                <div class="subsection">
-                    <div class="chart">
-                        <span>各年齡性別的顧客滿意度長條圖</span>
-                        <div class="fixW">
-                            <canvas id="barChart"></canvas>
-
-                        </div>
+            <div class="subsection">
+                <div class="chart">
+                    <label>各年齡性別的顧客滿意度長條圖</label>
+                    <div class="fixW">
+                        <canvas id="barChart"></canvas>
                     </div>
-                </div>
-                <div class="subsection">
-                    <div class="chart"></div>
                 </div>
             </div>
-
-            <div class="section section-d" id="section-d">
-                <div class="section-title">D. 日常營運項目</div>
-                <div class="subsection">
-                    <div class="chart" data-container="massageChairChart">
-                        <label>2023年6月份按摩椅營運狀況-全地區</label>
-                        <canvas data-chart-type="bar" data-chart="massageChairAll"></canvas>
-                    </div>
-                </div>
-                <div class="subsection">
-                    <div class="chart" data-container="aimChart">
-                        <label>2023年6月份業務員目標</label>
-                        <canvas data-chart-type="bar" data-chart="aim"></canvas>
-                    </div>
-                </div>
-                <div class="subsection">
-                    <div class="chart" data-container="touchTable">
-                        <label>潛在顧客接觸點</label>
-                        <table border="1px">
-                            <thead>
-                                <tr>
-                                    <td>專案編號</td>
-                                    <td>會員姓名</td>
-                                    <td>專案起始日</td>
-                                    <td>專案結束日</td>
-                                    <td>接觸次數</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><span data-project-id>P176593758139</span></td>
-                                    <td>習大大</td>
-                                    <td>2023-06-04</td>
-                                    <td>-</td>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <td><span data-project-id>P176593776044</span></td>
-                                    <td>李大大</td>
-                                    <td>2023-06-07</td>
-                                    <td>-</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td><span data-project-id>P176593738561</span></td>
-                                    <td>劉大大</td>
-                                    <td>2023-06-11</td>
-                                    <td>-</td>
-                                    <td>4</td>
-                                </tr>
-                            </tbody>
-                        </table>
+            <div class="subsection">
+                <div class="chart">
+                    <label>行銷廣告觸及數折線圖</label>
+                    <span class="buttons btn-group" role="group">
+                        <button class="btn btn-secondary" onclick="updateChart('week')">週</button>
+                        <button class="btn btn-secondary" onclick="updateChart('month')">月</button>
+                        <button class="btn btn-secondary" onclick="updateChart('year')">年</button>
+                    </span>
+                    <div class="fixW">
+                        <canvas id="kpiChart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
 
-  <script>
-    // 行銷 KPI1 折線圖資料
+        <div class="section section-d" id="section-d">
+            <div class="section-title">D. 日常營運項目</div>
+            <div class="subsection">
+                <div class="chart" data-container="massageChairChart">
+                    <label>2023年6月份按摩椅營運狀況-全地區</label>
+                    <canvas data-chart-type="bar" data-chart="massageChairAll"></canvas>
+                </div>
+            </div>
+            <div class="subsection">
+                <div class="chart" data-container="aimChart">
+                    <label>2023年6月份業務員目標</label>
+                    <canvas data-chart-type="bar" data-chart="aim"></canvas>
+                </div>
+            </div>
+            <div class="subsection">
+                <div class="chart" data-container="touchTable">
+                    <label>潛在顧客接觸點</label>
+                    <table border="1px">
+                        <thead>
+                            <tr>
+                                <td>專案編號</td>
+                                <td>會員姓名</td>
+                                <td>專案起始日</td>
+                                <td>專案結束日</td>
+                                <td>接觸次數</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span data-project-id>P176593758139</span></td>
+                                <td>習大大</td>
+                                <td>2023-06-04</td>
+                                <td>-</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <td><span data-project-id>P176593776044</span></td>
+                                <td>李大大</td>
+                                <td>2023-06-07</td>
+                                <td>-</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td><span data-project-id>P176593738561</span></td>
+                                <td>劉大大</td>
+                                <td>2023-06-11</td>
+                                <td>-</td>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
+        <script>
+            // 行銷 KPI1 折線圖資料
 
-    // 假設的數據
-    const websiteData = [100, 150, 120, 180, 200, 160, 220];
-    const fbData = [80, 100, 90, 120, 110, 130, 150];
-    const igData = [50, 60, 70, 80, 90, 100, 110];
-    const dates = ['2023/06/11', '2023/06/12', '2023/06/13', '2023/06/14', '2023/06/15', '2023/06/16', '2023/06/17'];
+            // 假設的數據
+            const websiteData = [100, 150, 120, 180, 200, 160, 220];
+            const fbData = [80, 100, 90, 120, 110, 130, 150];
+            const igData = [50, 60, 70, 80, 90, 100, 110];
+            const dates = ['2023/06/11', '2023/06/12', '2023/06/13', '2023/06/14', '2023/06/15', '2023/06/16',
+                '2023/06/17'
+            ];
 
-    // 初始化折線圖
-    const ctx = document.getElementById('kpiChart').getContext('2d');
-    let kpiChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: dates,
-        datasets: [{
-            label: '網站',
-            data: websiteData,
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            fill: false
-          },
-          {
-            label: 'FB',
-            data: fbData,
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
-            borderColor: 'rgba(54, 162, 235, 1)',
-            borderWidth: 1,
-            fill: false
-          },
-          {
-            label: 'IG',
-            data: igData,
-            backgroundColor: 'rgba(75, 192, 192, 0.5)',
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            fill: false
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false
-      }
-    });
+            // 初始化折線圖
+            const ctx = document.getElementById('kpiChart').getContext('2d');
+            let kpiChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dates,
+                    datasets: [{
+                            label: '網站',
+                            data: websiteData,
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        },
+                        {
+                            label: 'FB',
+                            data: fbData,
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        },
+                        {
+                            label: 'IG',
+                            data: igData,
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
 
-    // 更新圖表
-    function updateChart(type) {
-      let newData = [];
-      let newLabels = [];
+            // 更新圖表
+            function updateChart(type) {
+                let newData = [];
+                let newLabels = [];
 
-      switch (type) {
-        case 'week':
-          newData = websiteData.slice(0, 7);
-          newLabels = dates.slice(0, 7);
-          break;
-        case 'month':
-          newData = websiteData.slice(0, 4);
-          newLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
-          break;
-        case 'year':
-          newData = websiteData.slice(0, 12);
-          newLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-          break;
-        default:
-          newData = websiteData;
-          newLabels = dates;
-      }
+                switch (type) {
+                    case 'week':
+                        newData = websiteData.slice(0, 7);
+                        newLabels = dates.slice(0, 7);
+                        break;
+                    case 'month':
+                        newData = websiteData.slice(0, 4);
+                        newLabels = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+                        break;
+                    case 'year':
+                        newData = websiteData.slice(0, 12);
+                        newLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
+                            'Dec'
+                        ];
+                        break;
+                    default:
+                        newData = websiteData;
+                        newLabels = dates;
+                }
 
-      kpiChart.data.labels = newLabels;
-      kpiChart.data.datasets[0].data = newData;
-      kpiChart.update();
-    }
+                kpiChart.data.labels = newLabels;
+                kpiChart.data.datasets[0].data = newData;
+                kpiChart.update();
+            }
 
-     // 行銷 KPI2 長條圖資料
+            // 行銷 KPI2 長條圖資料
 
-     var ageData = [20, 25, 30, 35, 40, 45, 50];
-     var satisfactionData = [];
-     var labels = [];
-     var barChart;
-     
-     function getRandomSatisfaction() {
-       return Math.floor(Math.random() * 10) + 1;
-     }
-     
-     function generateData() {
-       satisfactionData = [];
-       labels = [];
-     
-       for (var i = 0; i < ageData.length; i++) {
-         var age = ageData[i];
-         var maleSatisfaction = getRandomSatisfaction();
-         var femaleSatisfaction = getRandomSatisfaction();
-     
-         satisfactionData.push({
-           age: age,
-           maleSatisfaction: maleSatisfaction,
-           femaleSatisfaction: femaleSatisfaction
-         });
-     
-         labels.push('年齡' + age);
-       }
-     }
-     
-     function createBarChart() {
-       var ctx2 = document.getElementById('barChart').getContext('2d');
-       barChart = new Chart(ctx2, {
-         type: 'bar',
-         data: {
-           labels: labels,
-           datasets: [
-             {
-               label: '男性',
-               data: satisfactionData.map(item => item.maleSatisfaction),
-               backgroundColor: 'rgba(54, 162, 235, 0.8)'
-             },
-             {
-               label: '女性',
-               data: satisfactionData.map(item => item.femaleSatisfaction),
-               backgroundColor: 'rgba(255, 99, 132, 0.8)'
-             }
-           ]
-         },
-         options: {
-           responsive: true,
-           maintainAspectRatio: false,
-           scales: {
-             x: {
-               display: true,
-               title: {
-                 display: true,
-                 text: '年齡'
-               }
-             },
-             y: {
-               display: true,
-               title: {
-                 display: true,
-                 text: '顧客服務滿意度'
-               },
-               suggestedMin: 1,
-               suggestedMax: 10
-             }
-           }
-         }
-       });
-     }
-     
-     generateData();
-     createBarChart();
-     
-  </script>
+            var ageData = [20, 25, 30, 35, 40, 45, 50];
+            var satisfactionData = [];
+            var labels = [];
+            var barChart;
+
+            function getRandomSatisfaction() {
+                return Math.floor(Math.random() * 10) + 1;
+            }
+
+            function generateData() {
+                satisfactionData = [];
+                labels = [];
+
+                for (var i = 0; i < ageData.length; i++) {
+                    var age = ageData[i];
+                    var maleSatisfaction = getRandomSatisfaction();
+                    var femaleSatisfaction = getRandomSatisfaction();
+
+                    satisfactionData.push({
+                        age: age,
+                        maleSatisfaction: maleSatisfaction,
+                        femaleSatisfaction: femaleSatisfaction
+                    });
+
+                    labels.push('年齡' + age);
+                }
+            }
+
+            function createBarChart() {
+                var ctx2 = document.getElementById('barChart').getContext('2d');
+                barChart = new Chart(ctx2, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                                label: '男性',
+                                data: satisfactionData.map(item => item.maleSatisfaction),
+                                backgroundColor: 'rgba(54, 162, 235, 0.8)'
+                            },
+                            {
+                                label: '女性',
+                                data: satisfactionData.map(item => item.femaleSatisfaction),
+                                backgroundColor: 'rgba(255, 99, 132, 0.8)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: '年齡'
+                                }
+                            },
+                            y: {
+                                display: true,
+                                title: {
+                                    display: true,
+                                    text: '顧客服務滿意度'
+                                },
+                                suggestedMin: 1,
+                                suggestedMax: 10
+                            }
+                        }
+                    }
+                });
+            }
+
+            generateData();
+            createBarChart();
+            //行銷KPI3
+            var financialData = {
+                labels: ['2020', '2021', '2022', '2023', '2024'],
+                revenue: [500000, 600000, 700000, 800000, 900000],
+                cost: [350000, 400000, 450000, 500000, 550000],
+                profit: [150000, 200000, 250000, 300000, 350000]
+            };
+
+            // 繪製財務健康圖
+            var ctx3 = document.getElementById('financialChart').getContext('2d');
+            var financialChart = new Chart(ctx3, {
+                type: 'line',
+                data: {
+                    labels: financialData.labels,
+                    datasets: [{
+                            label: '收入',
+                            data: financialData.revenue,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 2,
+                            fill: true
+                        },
+                        {
+                            label: '成本',
+                            data: financialData.cost,
+                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                            borderColor: 'rgba(255, 99, 132, 1)',
+                            borderWidth: 2,
+                            fill: true
+                        },
+                        {
+                            label: '利潤',
+                            data: financialData.profit,
+                            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 2,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '年份'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '金額（美元）'
+                            }
+                        }
+                    }
+                }
+            });
+        </script>
 </body>
 
 </html>
