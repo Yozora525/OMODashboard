@@ -38,6 +38,14 @@ def Dashboard():
 def MassageChair():
     
     return render_template('massageChair.html')
+
+
+# 接觸點
+@app.route("/touch",methods=['GET'])
+def Touch():
+    touch = request.args.get('touch')
+    
+    return render_template('touch.html', strTouch=touch)
 ############################## page ##############################
 
 

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include '/frame/head.html' %}
+<script>
+    const touch = '{{strTouch}}';
+</script>
+<script type="text/javascript" src="../static/js/pageFunction/touch.js"></script>
+<script type="text/javascript" src="../static/js/doc.ready/touch.js"></script>
+
+<body>
+    {% include '/frame/header.html' %}
+    <main>
+        <div style="height:300px;width: 500px;text-align: center;" data-container="touchChart">
+            <label>接觸點</label>
+            <canvas data-chart-type="bar" data-chart="touch"></canvas>
+        </div>
+    </main>
+    {% include '/frame/footer.html' %}
+</body>
+</html>
