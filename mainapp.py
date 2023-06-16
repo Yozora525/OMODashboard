@@ -47,7 +47,7 @@ def customer():
 
 
 @app.route("/supplier")
-def customer():
+def supplier():
     
     return render_template('supplier.html')
 
