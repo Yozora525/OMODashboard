@@ -39,6 +39,7 @@ def MassageChair():
     
     return render_template('massageChair.html')
 
+
 @app.route("/customer")
 def customer():
     
