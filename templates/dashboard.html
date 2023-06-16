@@ -31,12 +31,15 @@
             <div class="section-title">A. 客戶分析</div>
             <div class="subsection">
                 <div class="chart">
-                    <label>潛在客戶漏斗分析</label>
-                    <canvas id="funnelchart"></canvas>
+                    <!-- 折線圖 -->
+                    <div class="chart">
+                        <label>潛在客戶漏斗分析</label>
+                        <canvas id="funnelchart"></canvas>
+                    </div>
                 </div>
                 <div class="chart">
                     <label>潛在客戶來源</label>
-                    <canvas id="clientpiechart"></canvas>
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
         </div>
@@ -141,41 +144,10 @@
 
 
     <script>
+        /*潛在客戶來源*/
         /*潛在客戶漏斗分析*/
-        window.onload = () => {
-            const dataValues = [250, 96, 32];
-            const funnel_chart = document.getElementById("funnelchart").getContext("2d");
-            window.myBar = new Chart(funnel_chart, {
-                type: 'funnel',
-                data: {
-                    labels: ['參與實體銷售會人數/公共按摩椅者/廣告觸及次數', '加入會員/到店使用體驗券', '購買按摩椅的忠實顧客'],
-                    datasets: [{
-                        data: dataValues,
-                        backgroundColor: [
-                            'rgba(255, 159, 64, 0.7)',
-                            'rgba(255, 205, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)'
-                        ]
-                    }]
-                },
-                options: {
-                    indexAxis: 'y',
-                    title: {
-                        display: true,
-                        text: 'Chart.js Funnel Chart'
-                    },
-                    plugins: {
-                        datalabels: {
-                            display: false // Hide the data values
-                        }
-                    }
-                }
-            });
-        };
-
-        /*潛在客戶來源圓餅圖*/
         // 取得 canvas 元素
-        var piechart = document.getElementById('clientpiechart').getContext('2d');
+        var ctx = document.getElementById('myChart').getContext('2d');
         var dataValues = [66, 99, 150];
         var sum = dataValues.reduce((a, b) => a + b, 0);
         var percentages = dataValues.map(data => ((data / sum) * 100).toFixed(2));
@@ -192,7 +164,7 @@
                 datalabels: {
                     color: '#fff',
                     font: {
-                        size: '16px',
+                        size: '24px',
                         weight: 'bold'
                     },
                     formatter: function (value, context) {
@@ -206,13 +178,12 @@
             }
         };
         // 建立圓餅圖
-        var myPieChart = new Chart(piechart, {
+        var myPieChart = new Chart(ctx, {
             type: 'pie',
             data: data,
             options: options,
             plugins: [ChartDataLabels]
         });
-
 
         // 行銷 KPI1 折線圖資料
 
