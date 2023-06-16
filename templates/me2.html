@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>按摩椅销售量统计</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    canvas {
+      max-width: 400px;
+      max-height: 300px;
+    }
+    
+    .button-container1 {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 10px;
+    }
+    .button-container1 button {
+      width: 80px;
+      height: 30px;
+      margin-right: 5px;
+      background-color: #ddd;
+      border: none;
+      border-radius: 0;
+    }
+    .chart-title1 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+    <h2 class="chart-title1">依銷售員業績總額分析</h2>
+    
+    <div class="button-container1">
+      <button id="weeklyButton2">近一週</button>
+      <button id="monthlyButton2">近一個月</button>
+      <button id="yearlyButton2">近一年</button>
+    </div>
+    <canvas id="salesChart1" width="400" height="300"></canvas>
+  <script>
+    const weeklyData2 = {
+      labels: ['薰衣草', '庭酸', '遷移', '試驗'],
+      datasets: [
+        {
+          label: '總銷售額',
+          data: [160000, 240000, 200000, 120000],
+          backgroundColor: 'rgba(75, 192, 192, 0.2)',
+          borderColor: 'rgba(75, 192, 192, 1)',
+          borderWidth: 1
+        }
+      ]
+    };
+
+    const monthlyData2 = {
+      labels: ['薰衣草', '庭酸', '遷移', '試驗'],
+      datasets: [
+        {
+          label: '總銷售額',
+          data: [800000, 700000, 900000, 600000],
+          backgroundColor: 'rgba(255, 99, 132, 0.2)',
+          borderColor: 'rgba(255, 99, 132, 1)',
+          borderWidth: 1
+        }
+      ]
+    };
+
+    const yearlyData2 = {
+      labels: ['薰衣草', '庭酸', '遷移', '試驗'],
+      datasets: [
+        {
+          label: '總銷售額',
+          data: [7550000, 6000000, 4500000, 5500000],
+          backgroundColor: 'rgba(54, 162, 235, 0.2)',
+          borderColor: 'rgba(54, 162, 235, 1)',
+          borderWidth: 1
+        }
+      ]
+    };
+
+    const ctx = document.getElementById('salesChart1').getContext('2d');
+    const salesChart1 = new Chart(ctx, {
+      type: 'bar',
+      data: weeklyData2,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            grid: {
+              display: false
+            }
+          },
+          y: {
+            beginAtZero: true,
+            ticks: {
+              callback: function (value, index, values) {
+                return '$' + value.toLocaleString();
+              }
+            }
+          }
+        },
+        plugins: {
+          legend: {
+            display: false
+          }
+        }
+      }
+    });
+
+    const weeklyButton2 = document.getElementById('weeklyButton2');
+    weeklyButton2.addEventListener('click', function (){
+      salesChart1.data = weeklyData2;
+      salesChart1.update();
+    });
+
+    const monthlyButton2 = document.getElementById('monthlyButton2');
+    monthlyButton2.addEventListener('click', function (){
+      salesChart1.data = monthlyData2;
+      salesChart1.update();
+    });
+
+    const yearlyButton2 = document.getElementById('yearlyButton2');
+    yearlyButton2.addEventListener('click', function () {
+      salesChart1.data = yearlyData2;
+      salesChart1.update();
+    });
+  </script>
+</body>
+</html>
