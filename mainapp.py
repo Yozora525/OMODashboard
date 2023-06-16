@@ -46,6 +46,12 @@ def customer():
     return render_template('customer.html')
 
 
+@app.route("/supplier")
+def customer():
+    
+    return render_template('supplier.html')
+
+
 # 接觸點
 @app.route("/touch",methods=['GET'])
 def Touch():
