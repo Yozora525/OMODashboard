@@ -7,7 +7,7 @@ $(function(){
 
     // click table's project id . by shiyan
     $("[data-project-id]").on("click", function(){
-        location.href = '/touch?touch=' + this.textContent;
+        window.open('/touch?touch=' + this.textContent);
     });
 
     // ################################### chart ###################################
