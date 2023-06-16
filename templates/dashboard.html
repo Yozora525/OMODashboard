@@ -6,7 +6,6 @@
 <script type="text/javascript" src="../static/js/doc.ready/dashboard.js"></script>
 <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" />
 <style>
-   
 </style>
 
 <body>
@@ -30,7 +29,7 @@
         <div class="section section-a" id="section-a">
             <div class="section-title">A. 客戶分析</div>
             <div class="subsection">
-                <div class="chart">
+                <div class="chart" style="height: 355px;">
                     <label>潛在客戶漏斗分析</label>
                     <div class="custom-legend">
                         <div class="legend-item" onclick="toggleDataset(0)">
@@ -46,10 +45,10 @@
                             <div>購買按摩椅的忠實顧客</div>
                         </div>
                     </div>
-                    <canvas id="funnelchart"></canvas>
+                    <canvas id="funnelchart" style="width: 300px; height: 200px;"></canvas>
 
                 </div>
-                <div class="chart">
+                <div class="chart" style="height: 355px;">
                     <label>潛在客戶來源</label>
                     <canvas id="clientpiechart"></canvas>
                 </div>
@@ -169,11 +168,7 @@
                     labels: ['參與實體銷售會人數/公共按摩椅者/廣告觸及次數', '加入會員/到店使用體驗券', '購買按摩椅的忠實顧客'],
                     datasets: [{
                         data: percentages,
-                        backgroundColor: [
-                            'rgba(255, 159, 64, 0.7)',
-                            'rgba(255, 205, 86, 0.7)',
-                            'rgba(75, 192, 192, 0.7)'
-                        ]
+                        backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
                     }]
                 },
                 options: {
@@ -186,8 +181,10 @@
                         datalabels: {
                             display: true,
                             font: {
+                                size: '10px',
                                 weight: 'bold'
                             },
+                            color: '#000000',
                             formatter: function (value) {
                                 return value + '%';
                             }
@@ -232,7 +229,7 @@
         var options = {
             plugins: {
                 datalabels: {
-                    color: '#fff',
+                    color: '#000000',
                     font: {
                         size: '14px',
                         weight: 'bold'
