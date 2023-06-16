@@ -149,3 +149,36 @@ button{
 label{
     font-weight: bold;
 }
+
+/*漏斗圖*/
+.chart-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-legend {
+    font-size: 10px;
+    display: flex;
+    flex-wrap: wrap;
+
+    max-width: 100%;
+    padding: 8px;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
