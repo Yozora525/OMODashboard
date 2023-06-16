@@ -6,7 +6,37 @@
 <script type="text/javascript" src="../static/js/doc.ready/dashboard.js"></script>
 <link rel="stylesheet" type="text/css" href="../static/css/dashboard.css" />
 <style>
+    .chart-container {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 
+    .custom-legend {
+        font-size: 10px;
+        display: flex;
+        flex-wrap: wrap;
+
+        max-width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        z-index: 2;
+    }
+
+    .legend-item {
+        display: flex;
+        align-items: center;
+        margin-right: 20px;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+
+    .legend-color {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+    }
 </style>
 
 <body>
@@ -31,15 +61,27 @@
             <div class="section-title">A. 客戶分析</div>
             <div class="subsection">
                 <div class="chart">
-                    <!-- 折線圖 -->
-                    <div class="chart">
-                        <label>潛在客戶漏斗分析</label>
-                        <canvas id="funnelchart"></canvas>
+                    <label>潛在客戶漏斗分析</label>
+                    <div class="custom-legend">
+                        <div class="legend-item" onclick="toggleDataset(0)">
+                            <div class="legend-color" style="background-color: rgba(255, 159, 64, 0.7);"></div>
+                            <div>參與實體銷售會人數/公共按摩椅者/廣告觸及次數</div>
+                        </div>
+                        <div class="legend-item" onclick="toggleDataset(1)">
+                            <div class="legend-color" style="background-color: rgba(255, 205, 86, 0.7);"></div>
+                            <div>加入會員/到店使用體驗券</div>
+                        </div>
+                        <div class="legend-item" onclick="toggleDataset(2)">
+                            <div class="legend-color" style="background-color: rgba(75, 192, 192, 0.7);"></div>
+                            <div>購買按摩椅的忠實顧客</div>
+                        </div>
                     </div>
+                    <canvas id="funnelchart"></canvas>
+
                 </div>
                 <div class="chart">
                     <label>潛在客戶來源</label>
-                    <canvas id="myChart"></canvas>
+                    <canvas id="clientpiechart"></canvas>
                 </div>
             </div>
         </div>
@@ -144,10 +186,69 @@
 
 
     <script>
-        /*潛在客戶來源*/
         /*潛在客戶漏斗分析*/
-        // 取得 canvas 元素
-        var ctx = document.getElementById('myChart').getContext('2d');
+        var funnelChart;
+        window.onload = () => {
+            const dataValues = [500, 294, 63];
+            const maxDataValue = Math.max(...dataValues);
+            const percentages = dataValues.map(value => ((value / maxDataValue) * 100).toFixed(2));
+            const funnel_chart = document.getElementById("funnelchart").getContext("2d");
+            funnelChart = new Chart(funnel_chart, {
+                type: 'funnel',
+                data: {
+                    labels: ['參與實體銷售會人數/公共按摩椅者/廣告觸及次數', '加入會員/到店使用體驗券', '購買按摩椅的忠實顧客'],
+                    datasets: [{
+                        data: percentages,
+                        backgroundColor: [
+                            'rgba(255, 159, 64, 0.7)',
+                            'rgba(255, 205, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)'
+                        ]
+                    }]
+                },
+                options: {
+                    indexAxis: 'y',
+                    title: {
+                        display: true,
+                        text: 'Chart.js Funnel Chart'
+                    },
+                    plugins: {
+                        datalabels: {
+                            display: true,
+                            font: {
+                                weight: 'bold'
+                            },
+                            formatter: function (value) {
+                                return value + '%';
+                            }
+                        }
+                    },
+                    tooltips: {
+                        callbacks: {
+                            label: function (context) {
+                                const value = context.raw;
+                                const percentage = (value / maxDataValue * 100).toFixed(2);
+                                return percentage + '%';
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+        };
+
+        function toggleDataset(datasetIndex) {
+            funnelChart.getDatasetMeta(0).data[datasetIndex].hidden = !funnelChart.getDatasetMeta(0).data[
+                    datasetIndex]
+                .hidden;
+            funnelChart.update();
+        }
+
+        /*潛在客戶來源*/
+        var client_piechart = document.getElementById('clientpiechart').getContext('2d');
         var dataValues = [66, 99, 150];
         var sum = dataValues.reduce((a, b) => a + b, 0);
         var percentages = dataValues.map(data => ((data / sum) * 100).toFixed(2));
@@ -158,13 +259,12 @@
                 backgroundColor: ['#ff6384', '#36a2eb', '#ffce56']
             }]
         };
-        // 選項
         var options = {
             plugins: {
                 datalabels: {
                     color: '#fff',
                     font: {
-                        size: '24px',
+                        size: '14px',
                         weight: 'bold'
                     },
                     formatter: function (value, context) {
@@ -177,8 +277,7 @@
                 position: 'bottom'
             }
         };
-        // 建立圓餅圖
-        var myPieChart = new Chart(ctx, {
+        var myPieChart = new Chart(client_piechart, {
             type: 'pie',
             data: data,
             options: options,
